@@ -8,19 +8,23 @@ function processnewcommand {
 	case $1 in
 		"Accelerometer orientation changed: normal")
 			echo "screen rotated to normal"
+			xinput --enable "AT Translated Set 2 keyboard"
 			screenrotation.sh "normal"
 			;;
 		"Accelerometer orientation changed: bottom-up")
 			echo "screen rotated to inverted"
+			xinput --disable "AT Translated Set 2 keyboard"
 			screenrotation.sh "inverted"
 			;;
 		"Accelerometer orientation changed: left-up")
 			echo "screen rotated to left"
 			screenrotation.sh "left"
+			xinput --disable "AT Translated Set 2 keyboard"
 			;;
 		"Accelerometer orientation changed: right-up")
 			echo "screen rotated to right"
 			screenrotation.sh "right"
+			xinput --disable "AT Translated Set 2 keyboard"
 			;;
 	esac
 }
