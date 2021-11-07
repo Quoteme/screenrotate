@@ -8,7 +8,7 @@ function processnewcommand {
 	case $1 in
 		"Accelerometer orientation changed: normal")
 			echo "screen rotated to normal"
-			xinput --enable "AT Translated Set 2 keyboard"
+			xinput --enable "MSFT0001:00 06CB:CE2D Touchpad"
 			xinput --enable "AT Translated Set 2 keyboard"
 			screenrotation.sh "normal"
 			;;
