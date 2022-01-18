@@ -5,6 +5,10 @@
 #
 
 function processnewcommand {
+	if ( ( $( cat ~/.config/flex5screenrotate/autorotate ) = "true" ) )
+	then
+		exit
+	fi
 	case $1 in
 		"Accelerometer orientation changed: normal")
 			echo "screen rotated to normal"

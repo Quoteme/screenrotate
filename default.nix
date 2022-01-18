@@ -17,5 +17,7 @@ stdenv.mkDerivation {
     chmod +x $out/bin/screenrotation.sh
     cp ./autoscreenrotation.sh $out/bin/
     chmod +x $out/bin/autoscreenrotation.sh
+    cp ./toggleautoscreenrotation.sh $out/bin/
+    chmod +x $out/bin/toggleautoscreenrotation.sh
   '';
 }
