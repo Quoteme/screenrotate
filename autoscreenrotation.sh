@@ -5,7 +5,7 @@
 #
 
 function processnewcommand {
-	if ( ( $( cat ~/.config/flex5screenrotate/autorotate ) = "true" ) )
+	if ( ( $( cat ~/.config/flex5screenrotate/autorotate ) = "false" ) )
 	then
 		exit
 	fi
