@@ -8,14 +8,17 @@
 
 screen=`xrandr --current | grep " connected" | awk '{print $1;}'`
 orientation=`xrandr --verbose -q | grep $screen | awk '{print $6}'`
+stylus_device=`xsetwacom --list devices | grep "STYLUS" | grep -o -P '(?<=id: ).*(?=type)'`
+eraser_device=`xsetwacom --list devices | grep "ERASER" | grep -o -P '(?<=id: ).*(?=type)'`
+touch_device=`xsetwacom --list devices | grep "TOUCH" | grep -o -P '(?<=id: ).*(?=type)'`
 
 echo $screen
 echo $orientation
 
 function wacom_setup {
-	xsetwacom set "Wacom HID 5218 Pen stylus" Rotate $1
-	xsetwacom set "Wacom HID 5218 Finger touch" Rotate $1
-	xsetwacom set "Wacom HID 5218 Pen eraser" Rotate $1
+	xsetwacom set $stylus_device Rotate $1
+	xsetwacom set $eraser_device Rotate $1
+	xsetwacom set $touch_device Rotate $1
 }
 
 if [[ -z "$1" ]]; then
