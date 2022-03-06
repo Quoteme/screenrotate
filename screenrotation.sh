@@ -21,19 +21,82 @@ function wacom_setup {
 	xsetwacom set $touch_device Rotate $1
 }
 
-if [[ -z "$1" ]]; then
-	echo "Missing argument!"
-	echo "Possible values are: normal, inverted, left, right"
-elif [ "$1" = "normal" ]; then
-	xrandr --output $screen --rotate normal
-	wacom_setup none
-elif [ "$1" = "inverted" ]; then
-	xrandr --output $screen --rotate inverted
-	wacom_setup half
-elif [ "$1" = "left" ]; then
-	xrandr --output $screen --rotate left
-	wacom_setup ccw
-elif [ "$1" = "right" ]; then
-	xrandr --output $screen --rotate right
-	wacom_setup cw
-fi
+function cycle_left {
+	case "$orientation" in
+		"normal")
+			rotate "left"
+			;;
+		"left")
+			rotate "inverted"
+			;;
+		"inverted")
+			rotate "right"
+			;;
+		"right")
+			rotate "normal"
+			;;
+	esac
+}
+
+function cycle_right {
+	case "$orientation" in
+		"normal")
+			rotate "right"
+			;;
+		"right")
+			rotate "inverted"
+			;;
+		"inverted")
+			rotate "left"
+			;;
+		"left")
+			rotate "normal"
+			;;
+	esac
+}
+
+function swap {
+	case "$orientation" in
+		"normal")
+			rotate "inverted"
+			;;
+		"inverted")
+			rotate "normal"
+			;;
+		"left")
+			rotate "right"
+			;;
+		"right")
+			rotate "left"
+			;;
+	esac
+}
+
+function rotate {
+	if [[ -z "$1" ]]; then
+		echo "Missing argument!"
+		echo "Possible values are: normal, inverted, left, right, cycle_left, cycle_right, swap"
+	elif [ "$1" = "normal" ]; then
+		xrandr --output $screen --rotate normal
+		wacom_setup none
+	elif [ "$1" = "inverted" ]; then
+		xrandr --output $screen --rotate inverted
+		wacom_setup half
+	elif [ "$1" = "left" ]; then
+		xrandr --output $screen --rotate left
+		wacom_setup ccw
+	elif [ "$1" = "right" ]; then
+		xrandr --output $screen --rotate right
+		wacom_setup cw
+	# Cycling
+	elif [ "$1" = "cycle_left" ]; then
+		cycle_left
+	elif [ "$1" = "cycle_right" ]; then
+		cycle_right
+	# Swapping
+	elif [ "$1" = "swap" ]; then
+		swap
+	fi
+}
+
+rotate $1
