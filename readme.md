@@ -1,15 +1,8 @@
 # screenrotate
 
-This program was originally written for the Lenovo flex 5. But I am
-working on making it compatible with most laptops I come in contact
-with.
-If your laptop supports `iio-sensor-proxy` automatic rotation should
-also work by starting `./autoscreenrotation.sh`.
-Otherwise use `./screenrotation.sh` with the arguments `normal`,
-`inverted`, `left`, `right`.
-
-The arguments `cycle_left`, `cycle_right` and `swap` respectively
-cycle the screen rotation or inverts it.
+This program was originally written for the Lenovo flex 5.
+But if your laptop has `iio-sensor-proxy` installed and
+supports it, automatic rotation should work on any laptop.
 
 ## Requirements
 
@@ -18,4 +11,18 @@ programs are required. `iio-sensor-proxy` is also needed.
 
 ## Usage
 
-Run `./autoscreenrotation.sh`
+If your laptop supports `iio-sensor-proxy`, run:
+
+```
+./autoscreenrotation.sh
+```
+
+if you like to set rotation manually, run these commands:
+
+`./screenrotation.sh` with the arguments `normal`,
+`inverted`, `left`, `right`.
+
+The arguments `cycle_left`, `cycle_right` and `swap` respectively
+cycle the screen rotation or inverts it.
+
+This is perfect if you can map physical buttons to these commands (like for a Thinkpad X201T)
