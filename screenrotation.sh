@@ -8,17 +8,31 @@
 
 screen=`xrandr --current | grep " connected" | awk '{print $1;}'`
 orientation=`xrandr --verbose -q | grep $screen | awk '{print $6}'`
-stylus_device=`xsetwacom --list devices | grep "STYLUS" | grep -o -P '(?<=id: ).*(?=type)'`
-eraser_device=`xsetwacom --list devices | grep "ERASER" | grep -o -P '(?<=id: ).*(?=type)'`
-touch_device=`xsetwacom --list devices | grep "TOUCH" | grep -o -P '(?<=id: ).*(?=type)'`
 
 echo $screen
 echo $orientation
 
 function wacom_setup {
+  stylus_device=`xsetwacom --list devices | grep "STYLUS" | grep -o -P '(?<=id: ).*(?=type)'`
+  eraser_device=`xsetwacom --list devices | grep "ERASER" | grep -o -P '(?<=id: ).*(?=type)'`
+  touch_device=`xsetwacom --list devices | grep "TOUCH" | grep -o -P '(?<=id: ).*(?=type)'`
 	xsetwacom set $stylus_device Rotate $1
 	xsetwacom set $eraser_device Rotate $1
 	xsetwacom set $touch_device Rotate $1
+}
+
+function xinput_setup {
+  # stylus_device=`xinput --list --name-only | grep "Stylus Pen"`
+  # eraser_device=`xinput --list --name-only | grep "Stylus Eraser"`
+  # touch_device=`xinput --list --name-only | grep "Touchpad"`
+  # xinput map-to-output "$stylus_device" $screen
+  # xinput map-to-output "$eraser_device" $screen
+  # xinput map-to-output "$touch_device" $screen
+
+  # ASUS ROG Flow X13
+  xinput map-to-output "ELAN9008:00 04F3:2C82" eDP
+  xinput map-to-output "ELAN9008:00 04F3:2C82 Stylus Pen (0)" eDP
+  xinput map-to-output "ELAN9008:00 04F3:2C82 Stylus Eraser (0)" eDP
 }
 
 function cycle_left {
@@ -97,6 +111,7 @@ function rotate {
 	elif [ "$1" = "swap" ]; then
 		swap
 	fi
+  xinput_setup
 }
 
 rotate $1
