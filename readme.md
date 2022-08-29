@@ -3,6 +3,8 @@
 This program was originally written for the Lenovo flex 5.
 But if your laptop has `iio-sensor-proxy` installed and
 supports it, automatic rotation should work on any laptop.
+Since version 1.7 I use an ASUS ROG Flow. Therefor new features and
+patches will be available first on the asus_rog_flow branch.
 
 ## Requirements
 
