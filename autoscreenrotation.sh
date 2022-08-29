@@ -8,16 +8,28 @@
 # Enable keyboard and touchpad
 #######################################
 function enableInput() {
-  xinput --enable "MSFT0001:00 06CB:CE2D Touchpad"
-  xinput --enable "AT Translated Set 2 keyboard"
+  for id in $(xinput --list | sed -n '/.*Mouse/s/.*=\([0-9]\+\).*/\1/p')
+  do
+    xinput --enable $id
+  done
+  for id in $(xinput --list | sed -n '/.*Keyboard/s/.*=\([0-9]\+\).*/\1/p')
+  do
+    xinput --enable $id
+  done
 }
 
 #######################################
 # Disable keyboard and touchpad
 #######################################
 function disableInput() {
-  xinput --disable "MSFT0001:00 06CB:CE2D Touchpad"
-  xinput --disable "AT Translated Set 2 keyboard"
+  for id in $(xinput --list | sed -n '/.*Mouse/s/.*=\([0-9]\+\).*/\1/p')
+  do
+    xinput --disable $id
+  done
+  for id in $(xinput --list | sed -n '/.*Keyboard/s/.*=\([0-9]\+\).*/\1/p')
+  do
+    xinput --disable $id
+  done
 }
 
 #######################################
