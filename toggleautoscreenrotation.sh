@@ -12,7 +12,9 @@ AUTOROTATE=$( cat ~/.config/autoscreenrotate )
 
 if ($AUTOROTATE = "true")
 then
+  notify-send "Autoscreenrotate" "Disabled"
 	echo "false" > ~/.config/autoscreenrotate
 else
+  notify-send "Autoscreenrotate" "Enabled"
 	echo "true" > ~/.config/autoscreenrotate
 fi

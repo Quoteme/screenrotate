@@ -13,7 +13,9 @@ AUTOROTATE=$( cat ~/.config/disableinput )
 
 if ($AUTOROTATE = "true")
 then
+  notify-send "Input" "Input will now be disabled on rotation"
 	echo "false" > ~/.config/disableinput
 else
+  notify-send "Input" "Input will now be left enabled on rotation"
 	echo "true" > ~/.config/disableinput
 fi
