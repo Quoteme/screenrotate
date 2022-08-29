@@ -2,7 +2,7 @@
 
 stdenv.mkDerivation {
   version = "1.0";
-  name = "flex5ScreenRotate";
+  name = "screenrotation";
   src = ./.;
   buildInputs = [
     libwacom
