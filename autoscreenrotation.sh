@@ -8,6 +8,7 @@
 # Enable keyboard and touchpad
 #######################################
 function enableInput() {
+  notify-send "Enable keyboard and touchpad"
   for id in $(xinput --list | sed -n '/.*Touchpad/s/.*=\([0-9]\+\).*/\1/p')
   do
     xinput --enable $id
@@ -26,6 +27,7 @@ function enableInput() {
 # Disable keyboard and touchpad
 #######################################
 function disableInput() {
+  notify-send "Disable keyboard and touchpad"
   for id in $(xinput --list | sed -n '/.*Touchpad/s/.*=\([0-9]\+\).*/\1/p')
   do
     xinput --disable $id
