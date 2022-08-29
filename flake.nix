@@ -38,6 +38,11 @@
               chmod +x $out/bin/toggleautoscreenrotation.sh
               cp ./toggledisableinput.sh $out/bin/
               chmod +x $out/bin/toggledisableinput.sh
+
+              cp ./enableInput.sh $out/bin/
+              chmod +x $out/bin/enableInput.sh
+              cp ./disableInput.sh $out/bin/
+              chmod +x $out/bin/disableInput.sh
             '';
           };
         }

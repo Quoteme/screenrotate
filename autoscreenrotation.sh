@@ -5,42 +5,6 @@
 #
 
 #######################################
-# Enable keyboard and touchpad
-#######################################
-function enableInput() {
-  for id in $(xinput --list | sed -n '/.*Touchpad/s/.*=\([0-9]\+\).*/\1/p')
-  do
-    xinput --enable $id
-  done
-  for id in $(xinput --list | sed -n '/.*Mouse/s/.*=\([0-9]\+\).*/\1/p')
-  do
-    xinput --enable $id
-  done
-  for id in $(xinput --list | sed -n '/.*Keyboard/s/.*=\([0-9]\+\).*/\1/p')
-  do
-    xinput --enable $id
-  done
-}
-
-#######################################
-# Disable keyboard and touchpad
-#######################################
-function disableInput() {
-  for id in $(xinput --list | sed -n '/.*Touchpad/s/.*=\([0-9]\+\).*/\1/p')
-  do
-    xinput --disable $id
-  done
-  for id in $(xinput --list | sed -n '/.*Mouse/s/.*=\([0-9]\+\).*/\1/p')
-  do
-    xinput --disable $id
-  done
-  for id in $(xinput --list | sed -n '/.*Keyboard/s/.*=\([0-9]\+\).*/\1/p')
-  do
-    xinput --disable $id
-  done
-}
-
-#######################################
 # This function is called each time `motion-sensor` writes to stdout.
 # Also, some config files affect this function.
 # - if ~/.config/autoscreenrotate is set to true, the screen will be
@@ -58,35 +22,35 @@ function processnewcommand {
 	case $1 in
 		"Accelerometer orientation changed: normal")
 			echo "screen rotated to normal"
+			screenrotation.sh "normal"
       if ( ( $( cat ~/.config/disableinput ) = "true" ) )
       then
-        enableInput
+        enableInput.sh
       fi
-			screenrotation.sh "normal"
 			;;
 		"Accelerometer orientation changed: bottom-up")
 			echo "screen rotated to inverted"
-      if ( ( $( cat ~/.config/disableinput ) = "false" ) )
-      then
-        disableInput
-      fi
 			screenrotation.sh "inverted"
+      if ( ( $( cat ~/.config/disableinput ) = "true" ) )
+      then
+        disableInput.sh
+      fi
 			;;
 		"Accelerometer orientation changed: left-up")
 			echo "screen rotated to left"
-      if ( ( $( cat ~/.config/disableinput ) = "false" ) )
-      then
-        disableInput
-      fi
 			screenrotation.sh "left"
+      if ( ( $( cat ~/.config/disableinput ) = "true" ) )
+      then
+        disableInput.sh
+      fi
 			;;
 		"Accelerometer orientation changed: right-up")
 			echo "screen rotated to right"
-      if ( ( $( cat ~/.config/disableinput ) = "false" ) )
-      then
-        disableInput
-      fi
 			screenrotation.sh "right"
+      if ( ( $( cat ~/.config/disableinput ) = "true" ) )
+      then
+        disableInput.sh
+      fi
 			;;
 	esac
 }
