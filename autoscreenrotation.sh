@@ -4,6 +4,12 @@
 # @DATE  : 2021-11-07 So 19:12 32
 #
 
+
+#######################################
+# This function is called each time `motion-sensor` writes to stdout.
+# Arguments:
+#   The line that was written to stdout.
+#######################################
 function processnewcommand {
 	if ( ( $( cat ~/.config/autoscreenrotate ) = "false" ) )
 	then
