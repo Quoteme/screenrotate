@@ -22,17 +22,15 @@ function wacom_setup {
 }
 
 function xinput_setup {
-  # stylus_device=`xinput --list --name-only | grep "Stylus Pen"`
-  # eraser_device=`xinput --list --name-only | grep "Stylus Eraser"`
-  # touch_device=`xinput --list --name-only | grep "Touchpad"`
-  # xinput map-to-output "$stylus_device" $screen
-  # xinput map-to-output "$eraser_device" $screen
-  # xinput map-to-output "$touch_device" $screen
+  # For stylus support
+  for id in $(xinput --list | sed -n '/.*Stylus/s/.*=\([0-9]\+\).*/\1/p')
+  do
+    echo $screen
+    xinput map-to-output $id $screen
+  done
 
   # ASUS ROG Flow X13
   xinput map-to-output "ELAN9008:00 04F3:2C82" eDP
-  xinput map-to-output "ELAN9008:00 04F3:2C82 Stylus Pen (0)" eDP
-  xinput map-to-output "ELAN9008:00 04F3:2C82 Stylus Eraser (0)" eDP
 }
 
 function cycle_left {
