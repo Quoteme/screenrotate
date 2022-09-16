@@ -6,7 +6,8 @@
 # This is a script that toggles rotation of the screen through xrandr,
 # and also toggles rotation of the stylus, eraser and cursor through xsetwacom
 
-screen=`xrandr --current | grep " connected" | awk '{print $1;}'`
+# screen=`xrandr --current | grep " connected" | awk '{print $1;}'`
+screen="eDP"
 orientation=`xrandr --verbose -q | grep $screen | awk '{print $6}'`
 
 echo $screen
