@@ -24,4 +24,4 @@ done
 # Save current keyboard brightness
 #######################################
 # TODO: Change this to a more generic solution
-brightnessctl --device="asus::kbd_backlight" get > /tmp/kbd_brightness_before_rotation
+brightnessctl --device="asus::kbd_backlight" --save

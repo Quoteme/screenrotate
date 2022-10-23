@@ -23,6 +23,4 @@ done
 #######################################
 # Resore last keyboard brightness
 #######################################
-if test -f "/tmp/kbd_brightness_before_rotation"; then
-  brightnessctl --device="asus::kbd_backlight" set $(cat /tmp/kbd_brightness_before_rotation)
-fi
+brightnessctl --device="asus::kbd_backlight" --restore
