@@ -27,4 +27,5 @@ done
 for bl in $(brightnessctl --list | sed -n "/.*kbd.*/s/Device '//p" | sed -n "s/' of class 'leds'://p")
 do
   brightnessctl --device "$bl" --save
+  brightnessctl --device "$bl" set 0
 done
