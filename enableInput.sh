@@ -23,4 +23,7 @@ done
 #######################################
 # Resore last keyboard brightness
 #######################################
-brightnessctl --device="asus::kbd_backlight" --restore
+for bl in $(brightnessctl --list | sed -n "/.*kbd.*/s/Device '//p" | sed -n "s/' of class 'leds'://p")
+do
+  brightnessctl --device "$bl" --restore
+done

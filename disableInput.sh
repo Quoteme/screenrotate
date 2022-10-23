@@ -24,4 +24,7 @@ done
 # Save current keyboard brightness
 #######################################
 # TODO: Change this to a more generic solution
-brightnessctl --device="asus::kbd_backlight" --save
+for bl in $(brightnessctl --list | sed -n "/.*kbd.*/s/Device '//p" | sed -n "s/' of class 'leds'://p")
+do
+  brightnessctl --device "$bl" --save
+done
